@@ -1,0 +1,58 @@
+.lab-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-header {
+  background: #16213e;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d3748;
+}
+
+.lab-header h1 {
+  color: #e2e8f0;
+  font-size: 24px;
+  margin: 0;
+}
+
+.lab-back-link {
+  color: #667eea;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  flex: 1;
+  transition: color 0.2s;
+}
+
+.lab-back-link:hover {
+  color: #a5b4fc;
+}
+
+.lab-header-spacer {
+  flex: 1;
+}
+
+.lab-main {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .lab-header {
+    padding: 12px 16px;
+  }
+
+  .lab-header h1 {
+    font-size: 18px;
+  }
+
+  .lab-main {
+    padding: 24px;
+  }
+}

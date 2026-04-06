@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base:     #0f0f1a;
+  --color-bg-card:     #16213e;
+  --color-bg-input:    #1a1a2e;
+  --color-bg-raised:   #1e2a4a;
+  --color-bg-deep:     #12192e;
+  --color-border:      #3a4a68;
+  --color-border-dim:  #2d3748;
+  --color-muted:       #4a5568;
+  --color-slate:       #64748b;
+  --color-text-dim:    #718096;
+  --color-text-soft:   #a0aec0;
+  --color-text:        #e2e8f0;
+  --color-accent:      #667eea;
+  --color-accent-dim:  #5a67d8;
+  --color-accent-soft: #a5b4fc;
+  --color-green:       #4ade80;
+  --color-green-soft:  #86efac;
+  --color-red-soft:    #fc8181;
+  --color-third:       #b45309;
+  --color-fifth:       #0f766e;
+  --font-ui: 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #e2e8f0;
+  background-color: #0f0f1a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 12px;
+  padding-right: 36px;
+}
+
+option {
+  background-color: rgba(20, 20, 38, 0.92);
+}
+
+@layer components {
+  /* ── SVG note dots ── */
+  .note-dot-tonic-major { fill: #667eea; }
+  .note-dot-tonic-minor { fill: #9f3fbf; }
+  .note-dot-scale       { fill: #1e3460; stroke: #667eea; stroke-width: 1.5; }
+  .note-dot-root-major  { fill: #667eea; stroke: #4a5fc8; stroke-width: 1.5; }
+  .note-dot-root-minor  { fill: #9f3fbf; stroke: #7a2a96; stroke-width: 1.5; }
+  .note-dot-third       { fill: #b45309; stroke: #78350f; stroke-width: 1.5; }
+  .note-dot-fifth       { fill: #0f766e; stroke: #134e4a; stroke-width: 1.5; }
+  .note-dot-seventh     { fill: #7c3aed; stroke: #5b21b6; stroke-width: 1.5; }
+  .note-dot-ninth       { fill: #065f46; stroke: #064e3b; stroke-width: 1.5; }
+  .note-dot-label {
+    fill: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    font-family: 'Inter', system-ui, sans-serif;
+    stroke: rgba(0, 0, 0, 0.45);
+    stroke-width: 2.5px;
+    paint-order: stroke fill;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── Fretboard SVG ── */
+  .fret-number  { fill: #4a5568; font-size: 9px; font-family: 'Inter', system-ui, sans-serif; pointer-events: none; user-select: none; }
+  .fret-inlay   { fill: #1e2d4a; }
+  .fret-nut     { fill: #c8d5e8; }
+  .fret-line    { stroke: #2d3a52; stroke-width: 1.5; }
+  .string-line  { stroke: #6b7fa0; }
+  .string-label { fill: #4a5568; font-size: 11px; font-weight: 600; font-family: 'Inter', system-ui, sans-serif; pointer-events: none; user-select: none; }
+
+  /* ── ChordDiagram SVG ── */
+  .cd-nut            { fill: #e2e8f0; }
+  .cd-fret-line      { stroke: #3a4a68; stroke-width: 1.5; }
+  .cd-fret-line-rect { fill: #3a4a68; }
+  .cd-string-line    { stroke: #6b7fa0; stroke-width: 1; }
+  .cd-open-mark      { fill: none; stroke: #718096; stroke-width: 1.5; }
+  .cd-mute-mark      { fill: #4a5568; font-size: 14px; font-family: 'Inter', system-ui, sans-serif; }
+  .cd-fret-number    { fill: #718096; font-size: 10px; font-family: 'Inter', system-ui, sans-serif; }
+  .cd-fret-marker    { fill: #4a5568; }
+
+  /* ── Tone indicators ── */
+  .tone-ind            { font-size: 10px; font-weight: 700; padding: 1px 4px; border-radius: 3px; border: 1px solid transparent; }
+  .tone-ind-root-major { color: #667eea; border-color: rgba(102, 126, 234, 0.4); }
+  .tone-ind-root-minor { color: #9f3fbf; border-color: rgba(159, 63, 191, 0.4); }
+  .tone-ind-third      { color: #b45309; border-color: rgba(180, 83, 9,   0.4); }
+  .tone-ind-fifth      { color: #0f766e; border-color: rgba(15, 118, 110, 0.4); }
+  .tone-ind-seventh    { color: #7c3aed; border-color: rgba(124, 58, 237, 0.4); }
+  .tone-ind-ninth      { color: #065f46; border-color: rgba(6,  95,  70,  0.4); }
+  .tone-ind-absent     { opacity: 0.25; }
+
+  /* ── Diatonic chord buttons ── */
+  .chord-numeral { color: #667eea; font-size: 11px; font-weight: 700; }
+  .chord-name    { color: #e2e8f0; font-size: 13px; font-weight: 600; }
+  .chord-quality { color: #718096; font-size: 10px; }
+
+  .info-chord {
+    background: #1a1a2e;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 4px;
+    gap: 4px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .info-chord:hover { background: #1e2a4a; border-color: rgba(102, 126, 234, 0.3); }
+  .info-chord-active {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.5);
+  }
+  .cof-info-panel--minor .info-chord-active {
+    background: rgba(159, 63, 191, 0.15);
+    border-color: rgba(159, 63, 191, 0.5);
+  }
+  .info-chords--selecting .info-chord {
+    border-color: rgba(102, 126, 234, 0.3);
+    background: #1e2a4a;
+    cursor: pointer;
+  }
+  .info-chords--selecting .info-chord:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.6);
+  }
+
+  /* ── CircleOfFifths SVG segments ── */
+  .seg-major { fill: #1e2a4a; stroke: #0f0f1a; stroke-width: 1.5; cursor: pointer; transition: fill 0.2s; }
+  .seg-major:hover { fill: rgba(102, 126, 234, 0.4); }
+  .seg-major.seg-major-active { fill: rgba(102, 126, 234, 0.6); }
+  .seg-major.non-diatonic { fill: #111827; }
+  .seg-major.non-diatonic:hover { fill: rgba(102, 126, 234, 0.3); }
+
+  .seg-minor { fill: #16213e; stroke: #0f0f1a; stroke-width: 1.5; cursor: pointer; transition: fill 0.2s; }
+  .seg-minor:hover { fill: rgba(118, 75, 162, 0.4); }
+  .seg-minor.seg-minor-active { fill: rgba(159, 63, 191, 0.6); }
+  .seg-minor.non-diatonic { fill: #0d1520; }
+  .seg-minor.non-diatonic:hover { fill: rgba(118, 75, 162, 0.3); }
+
+  .seg-diatonic-indicator { fill: rgba(102, 126, 234, 0.5); pointer-events: none; }
+  .seg-keysig { fill: #111827; stroke: #0f0f1a; stroke-width: 1.5; }
+
+  /* ── CircleOfFifths text labels ── */
+  .label-major {
+    fill: #e2e8f0; font-size: 15px; font-weight: 700;
+    font-family: 'Inter', system-ui, sans-serif;
+    pointer-events: none; user-select: none;
+  }
+  .label-major.label-major-active { fill: #ffffff; }
+  .label-major.non-diatonic { fill: #3a4a68; }
+
+  .label-minor {
+    fill: #a0aec0; font-size: 11px; font-weight: 500;
+    font-family: 'Inter', system-ui, sans-serif;
+    pointer-events: none; user-select: none;
+  }
+  .label-minor.label-minor-active { fill: #d8a8f0; }
+  .label-minor.non-diatonic { fill: #374056; }
+
+  .label-keysig {
+    fill: #718096; font-size: 10px; font-weight: 500;
+    font-family: 'Inter', system-ui, sans-serif;
+    pointer-events: none; user-select: none;
+  }
+  .label-keysig.label-keysig-tonic { fill: #e2e8f0; font-weight: 700; font-size: 11px; }
+  .cof-center-label {
+    fill: #ffffff; font-size: 22px; font-weight: 800;
+    font-family: 'Inter', system-ui, sans-serif;
+    pointer-events: none; user-select: none;
+  }
+
+  /* ── CircleOfFifths minor panel overrides ── */
+  .cof-info-panel--minor .info-note-badge {
+    background: rgba(159, 63, 191, 0.15);
+    border-color: rgba(159, 63, 191, 0.35);
+    color: #d8a8f0;
+  }
+  .cof-info-panel--minor .chord-numeral { color: #b06ed4; }
+  .cof-info-panel--minor .key-sig-sym   { color: #b06ed4; }
+  .cof-info-panel--minor .info-relative-link {
+    background: rgba(159, 63, 191, 0.12);
+    border-color: rgba(159, 63, 191, 0.3);
+    color: #d8a8f0;
+  }
+  .cof-info-panel--minor .info-relative-link:hover {
+    background: rgba(159, 63, 191, 0.25);
+    border-color: rgba(159, 63, 191, 0.55);
+    color: #e9c8ff;
+  }
+
+  /* ── Lab tab minor ── */
+  .lab-tab.active--minor { color: #9f3fbf; border-bottom-color: #9f3fbf; }
+
+  /* ── Mini transport animations ── */
+  .progression-mini-transport { animation: miniTransportIn 0.2s ease-out; }
+  .progression-mini-transport--stopping {
+    animation: miniTransportOut 0.25s ease-in forwards;
+    pointer-events: none;
+  }
+
+  /* ── Number input spinner suppression ── */
+  .progression-bpm-input::-webkit-outer-spin-button,
+  .progression-bpm-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .progression-bpm-input[type=number]               { -moz-appearance: textfield; }
+  .progression-timesig-input::-webkit-outer-spin-button,
+  .progression-timesig-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .progression-timesig-input[type=number]               { -moz-appearance: textfield; }
+}
+
+@layer utilities {
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes miniTransportIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes miniTransportOut {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(10px); }
+  }
+}
