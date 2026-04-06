@@ -47,7 +47,6 @@ const CHORD_TYPES: { value: ChordType; label: string; sup: string }[] = [
   { value: 'triad', label: 'Triad', sup: '' },
   { value: '6th',   label: '6',     sup: '⁶' },
   { value: '7th',   label: '7',     sup: '⁷' },
-  { value: '9th',   label: '9',     sup: '⁹' },
 ]
 
 const QUALITY_OPTIONS: { value: ChordQuality | 'auto'; label: string }[] = [
@@ -72,7 +71,7 @@ const QUALITY_INTERVALS: Record<ChordQuality, number[]> = {
   'min-maj':  [0, 3, 7, 11],
 }
 
-// 7th to add for each quality when chordType is '7th'/'9th' and base is a triad
+// 7th to add for each quality when chordType is '7th' and base is a triad
 const QUALITY_SEVENTH: Record<ChordQuality, number> = {
   major: 11, minor: 10, dominant: 10, augmented: 11, diminished: 9, 'half-dim': 10, 'min-maj': 11,
 }
@@ -85,10 +84,8 @@ function buildOverrideTones(rootSt: number, quality: ChordQuality, chordType: Ch
     intervals = triad
   } else if (chordType === '6th') {
     intervals = [...triad, 9]
-  } else if (chordType === '7th') {
+  } else { // '7th'
     intervals = [...triad, QUALITY_SEVENTH[quality]]
-  } else { // '9th'
-    intervals = [...triad, QUALITY_SEVENTH[quality], 2]
   }
   return intervals.map(i => (rootSt + i) % 12)
 }
